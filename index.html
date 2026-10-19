@@ -3,25 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Escáner QR Personal</title>
+    <title>Sistema Táctico de Identificación</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Enlazamos la librería de lectura de QR (jsQR o html5-qrcode) -->
+    <!-- Librería para escanear códigos QR -->
     <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
-    <link rel="manifest" href="manifest.json">
 </head>
 <body>
-    <div class="container">
-        <h1>Lector QR Personal</h1>
-        
-        <!-- Contenedor donde se activará la cámara -->
-        <div id="reader"></div>
+    <div class="mobile-frame">
+        <!-- Barra superior -->
+        <header class="app-header">
+            <button class="icon-btn">&#9776;</button>
+            <div class="badge-container">
+                <!-- Emblema o insignia militar simulada con CSS / Icono -->
+                <div class="military-emblem">★</div>
+            </div>
+            <button class="icon-btn">&#128276;</button>
+        </header>
 
-        <!-- Sección donde se muestra la información escaneada -->
-        <div id="result-container" class="hidden">
-            <h2>Información Encontrada:</h2>
-            <div id="qr-result"></div>
-            <button id="scan-again">Escanear otro</button>
-        </div>
+        <!-- Contenido Principal -->
+        <main class="app-content">
+            
+            <!-- Vista 1: Escáner inicial -->
+            <section id="scanner-section" class="view-section">
+                <div class="card-box">
+                    <h2>ESCANEAR CREDENCIAL QR</h2>
+                    <p>Alinee el código QR dentro del recuadro</p>
+                    <div id="reader"></div>
+                </div>
+            </section>
+
+            <!-- Vista 2: Datos Médicos (Oculta al inicio) -->
+            <section id="medical-section" class="view-section hidden">
+                <div class="data-card">
+                    <h2>DATOS MÉDICOS DE USUARIO</h2>
+                    <div id="medical-content">
+                        <!-- Se llena dinámicamente desde app.js -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Vista 3: Datos Profesionales (Oculta al inicio) -->
+            <section id="professional-section" class="view-section hidden">
+                <div class="data-card">
+                    <h2>DATOS PROFESIONALES DE USUARIO</h2>
+                    <div id="professional-content">
+                        <!-- Se llena dinámicamente desde app.js -->
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Barra de Navegación Inferior -->
+        <nav class="bottom-nav">
+            <button class="nav-item active" onclick="switchTab('scanner')">
+                <span>&#8962;</span>
+            </button>
+            <button class="nav-item" onclick="switchTab('medical')">
+                <span>&#128196;</span>
+            </button>
+            <button class="nav-item" onclick="switchTab('professional')">
+                <span>&#9881;</span>
+            </button>
+        </nav>
     </div>
 
     <script src="app.js"></script>
