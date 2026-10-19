@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Validador Militar - QR</title>
-    <link rel="manifest" href="/APP-QR-FANB/manifest.json">
+    <!-- FontAwesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -182,6 +182,36 @@
             border: 1px solid #c3e6cb;
         }
 
+        /* Pestañas de navegación interna del perfil */
+        .profile-tabs {
+            display: flex;
+            justify-content: space-between;
+            background: #d4d4ce;
+            border-radius: 8px;
+            padding: 4px;
+            margin-bottom: 15px;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 8px 10px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-radius: 6px;
+            flex: 1;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background: var(--military-olive);
+            color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
         .btn-action {
             background: var(--military-olive);
             color: white;
@@ -201,10 +231,7 @@
 
         .btn-secondary {
             background: #6c757d;
-        }
-
-        .btn-secondary:hover {
-            background: #5a6268;
+            margin-top: 15px;
         }
 
         .bottom-nav {
@@ -254,13 +281,21 @@
                 </div>
             </section>
 
-            <!-- VISTA 2: INFORMACIÓN DEL PROFESIONAL -->
+            <!-- VISTA 2: INFORMACIÓN DEL PROFESIONAL CON PESTAÑAS -->
             <section id="profile-view" class="view-section hidden">
                 <div class="success-alert">
                     <i class="fa-solid fa-circle-check"></i> Código QR verificado con éxito
                 </div>
 
-                <div class="data-card">
+                <!-- Botones de Pestañas Superiores -->
+                <div class="profile-tabs">
+                    <button class="tab-btn active" onclick="switchTab('tab-id', this)">IDENTIFICACIÓN</button>
+                    <button class="tab-btn" onclick="switchTab('tab-medical', this)">MÉDICO</button>
+                    <button class="tab-btn" onclick="switchTab('tab-prof', this)">PROFESIONAL</button>
+                </div>
+
+                <!-- Pestaña 1: Identificación -->
+                <div id="tab-id" class="tab-content data-card">
                     <h2>IDENTIFICACIÓN DE PERSONAL</h2>
                     <div class="profile-photo-container">
                         <img src="foto-tn-garcia.jpg" alt="Foto del Teniente de Navío R. García L." class="profile-photo">
@@ -272,7 +307,8 @@
                     <div class="data-field"><span class="label">ESTATUS:</span><span class="value active-status">ACTIVO</span></div>
                 </div>
 
-                <div class="data-card" style="margin-top: 15px;">
+                <!-- Pestaña 2: Datos Médicos -->
+                <div id="tab-medical" class="tab-content data-card hidden">
                     <h2>DATOS MÉDICOS</h2>
                     <div class="data-field"><span class="label">GRUPO SANGUÍNEO:</span><span class="value">O Rh+</span></div>
                     <div class="data-field"><span class="label">ALERGIAS / CONDICIONES:</span><span class="value">Ninguna conocida</span></div>
@@ -280,7 +316,8 @@
                     <div class="data-field"><span class="label">CONTACTO DE EMERGENCIA:</span><span class="value">Dpto. Sanidad Naval (Ext. 402)</span></div>
                 </div>
 
-                <div class="data-card" style="margin-top: 15px;">
+                <!-- Pestaña 3: Datos Profesionales -->
+                <div id="tab-prof" class="tab-content data-card hidden">
                     <h2>DATOS PROFESIONALES</h2>
                     <div class="data-field"><span class="label">ESPECIALIDAD:</span><span class="value">Ingeniería Naval y Superficie</span></div>
                     <div class="data-field"><span class="label">AÑOS DE SERVICIO:</span><span class="value">12 Años</span></div>
@@ -288,7 +325,7 @@
                     <div class="data-field"><span class="label">CONDECORACIONES:</span><span class="value">Cruz Naval al Mérito (2da Clase)</span></div>
                 </div>
 
-                <button class="btn-action btn-secondary" onclick="reiniciarEscaneo()" style="margin-top: 15px;">Escanear Otro Código</button>
+                <button class="btn-action btn-secondary" onclick="reiniciarEscaneo()">Escanear Otro Código</button>
             </section>
         </main>
 
@@ -313,6 +350,20 @@
         function reiniciarEscaneo() {
             document.getElementById('profile-view').classList.add('hidden');
             document.getElementById('scanner-view').classList.remove('hidden');
+            switchTab('tab-id', document.querySelector('.tab-btn'));
+        }
+        function switchTab(tabId, btnElement) {
+            // Ocultar todas las pestañas
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(el => el.classList.add('hidden'));
+
+            // Mostrar la seleccionada
+            document.getElementById(tabId).classList.remove('hidden');
+
+            // Actualizar botones activos
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(el => el.classList.remove('active'));
+            btnElement.classList.add('active');
         }
     </script>
 </body>
