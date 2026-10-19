@@ -1,4 +1,3 @@
-JavaScript
 self.addEventListener('install', (e) => {
   e.waitUntil(
     caches.open('qr-app-v1').then((cache) => {
