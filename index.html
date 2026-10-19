@@ -2,11 +2,9 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Validador de Identificación Militar - Teniente de Navío</title>
-    <!-- Tailwind CSS for modern responsive styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome for military and UI icons -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validador Militar - QR</title>
+    <!-- FontAwesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -20,7 +18,7 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #121212;
+            background-color: #1a1a1a;
             margin: 0;
             padding: 0;
             display: flex;
@@ -37,44 +35,285 @@
             background-color: var(--military-olive);
             display: flex;
             flex-direction: column;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             position: relative;
             overflow: hidden;
-            border-radius: 0px;
         }
 
-        @media (min-width: 421px) {
-            .mobile-frame {
-                border-radius: 36px;
-                border: 8px solid #2a2a2a;
-            }
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: var(--military-olive);
         }
 
-        /* Laser animation for QR scanner */
-        @keyframes scanLaser {
-            0% { top: 5%; opacity: 0.8; }
-            50% { top: 90%; opacity: 1; }
-            100% { top: 5%; opacity: 0.8; }
+        .military-grade {
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .laser-line {
-            position: absolute;
-            width: 85%;
-            height: 3px;
-            background: #ef4444;
-            box-shadow: 0 0 10px #ef4444, 0 0 20px #ef4444;
-            animation: scanLaser 2.5s infinite ease-in-out;
-            left: 7.5%;
+        .military-emblem {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #788661, #2c3521);
+            border: 2px solid #b5c49a;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #f5f5f0;
+            font-size: 1.2rem;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.3);
         }
 
-        /* Custom Scrollbar for inner content */
-        .app-content::-webkit-scrollbar {
-            width: 5px;
+        .app-content {
+            flex: 1;
+            background-color: #e8e8e3;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            padding: 20px;
+            overflow-y: auto;
+            box-sizing: border-box;
         }
-        .app-content::-webkit-scrollbar-track {
-            background: #e8e8e3;
+
+        .hidden {
+            display: none !important;
         }
-        .app-content::-webkit-scrollbar-thumb {
-            background: #b5c49a;
-            border-radius: 4px;
+
+        .card-box, .data-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 18px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            border: 1px solid #dcdcd5;
         }
+
+        .scanner-card {
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        #reader-container {
+            width: 100%;
+            height: 220px;
+            border: 2px dashed #788661;
+            border-radius: 10px;
+            background: #dcdcd5;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 15px 0;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #reader-container span {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: bold;
+        }
+
+        .data-card h2 {
+            font-size: 0.95rem;
+            text-align: center;
+            color: var(--text-main);
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 8px;
+            margin-top: 0;
+            letter-spacing: 0.5px;
+        }
+
+        .profile-photo-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+
+        .profile-photo {
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--military-olive);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .data-field {
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+        }
+
+        .data-field .label {
+            font-weight: 800;
+            color: var(--text-main);
+            display: block;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+        }
+
+        .data-field .value {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .active-status {
+            color: #2b7a0b;
+            font-weight: bold;
+        }
+
+        .success-alert {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            text-align: center;
+            margin-bottom: 15px;
+            font-weight: bold;
+            border: 1px solid #c3e6cb;
+        }
+
+        .btn-action {
+            background: var(--military-olive);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: bold;
+            width: 100%;
+            transition: background 0.2s;
+        }
+
+        .btn-action:hover {
+            background: var(--military-dark);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .bottom-nav {
+            height: 60px;
+            background-color: var(--military-dark);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .nav-item {
+            background: none;
+            border: none;
+            color: #8fa37a;
+            font-size: 1.4rem;
+            cursor: pointer;
+            padding: 10px;
+            transition: color 0.2s;
+        }
+
+        .nav-item.active, .nav-item:hover {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-frame">
+        <header class="app-header">
+            <div class="military-grade">T.N.</div>
+            <div class="military-emblem">
+                <i class="fa-solid fa-anchor"></i>
+            </div>
+        </header>
+
+        <main class="app-content">
+            <!-- VISTA 1: ESCÁNER DE CÓDIGO QR -->
+            <section id="scanner-view" class="view-section">
+                <div class="card-box scanner-card">
+                    <h2>ESCANEAR CÓDIGO QR</h2>
+                    <p>Alinee el código QR de la credencial militar dentro del cuadro para verificar su autenticidad.</p>
+                    <div id="reader-container" onclick="simularEscaneo()">
+                        <i class="fa-solid fa-camera" style="font-size: 3.5rem; color: #788661; margin-bottom: 10px;"></i>
+                        <span>Cámara activa</span>
+                    </div>
+                    <button class="btn-action" onclick="simularEscaneo()">Simular Escaneo Exitoso</button>
+                </div>
+            </section>
+
+            <!-- VISTA 2: INFORMACIÓN DEL PROFESIONAL -->
+            <section id="profile-view" class="view-section hidden">
+                <div class="success-alert">
+                    <i class="fa-solid fa-circle-check"></i> Código QR verificado con éxito
+                </div>
+
+                <div class="data-card">
+                    <h2>IDENTIFICACIÓN DE PERSONAL</h2>
+                    <div class="profile-photo-container">
+                        <img src="foto-tn-garcia.jpg" alt="Foto del Teniente de Navío R. García L." class="profile-photo">
+                    </div>
+                    <div class="data-field"><span class="label">RANGO:</span><span class="value">Teniente de Navío</span></div>
+                    <div class="data-field"><span class="label">NOMBRE COMPLETO:</span><span class="value">R. García L.</span></div>
+                    <div class="data-field"><span class="label">NÚMERO DE IDENTIFICACIÓN (NI):</span><span class="value">8492015839</span></div>
+                    <div class="data-field"><span class="label">UNIDAD ASIGNADA:</span><span class="value">Comando de Guardacostas</span></div>
+                    <div class="data-field"><span class="label">ESTATUS:</span><span class="value active-status">ACTIVO</span></div>
+                </div>
+
+                <div class="data-card" style="margin-top: 15px;">
+                    <h2>DATOS MÉDICOS</h2>
+                    <div class="data-field"><span class="label">GRUPO SANGUÍNEO:</span><span class="value">O Rh+</span></div>
+                    <div class="data-field"><span class="label">ALERGIAS / CONDICIONES:</span><span class="value">Ninguna conocida</span></div>
+                    <div class="data-field"><span class="label">VACUNAS PRINCIPALES:</span><span class="value">Al día (COVID-19, Tétanos, Fiebre Amarilla)</span></div>
+                    <div class="data-field"><span class="label">CONTACTO DE EMERGENCIA:</span><span class="value">Dpto. Sanidad Naval (Ext. 402)</span></div>
+                </div>
+
+                <div class="data-card" style="margin-top: 15px;">
+                    <h2>DATOS PROFESIONALES</h2>
+                    <div class="data-field"><span class="label">ESPECIALIDAD:</span><span class="value">Ingeniería Naval y Superficie</span></div>
+                    <div class="data-field"><span class="label">AÑOS DE SERVICIO:</span><span class="value">12 Años</span></div>
+                    <div class="data-field"><span class="label">AUTORIZACIÓN DE ACCESO:</span><span class="value">Nivel Alfa (Restringido)</span></div>
+                    <div class="data-field"><span class="label">CONDECORACIONES:</span><span class="value">Cruz Naval al Mérito (2da Clase)</span></div>
+                </div>
+
+                <button class="btn-action btn-secondary" onclick="reiniciarEscaneo()" style="margin-top: 15px;">Escanear Otro Código</button>
+            </section>
+        </main>
+
+        <nav class="bottom-nav">
+            <button class="nav-item" onclick="reiniciarEscaneo()" title="Actividad">
+                <i class="fa-solid fa-chart-line"></i>
+            </button>
+            <button class="nav-item active" onclick="reiniciarEscaneo()" title="Código QR">
+                <i class="fa-solid fa-qrcode"></i>
+            </button>
+            <button class="nav-item" title="Configuración">
+                <i class="fa-solid fa-gear"></i>
+            </button>
+        </nav>
+    </div>
+
+    <script>
+        function simularEscaneo() {
+            document.getElementById('scanner-view').classList.add('hidden');
+            document.getElementById('profile-view').classList.remove('hidden');
+        }
+        function reiniciarEscaneo() {
+            document.getElementById('profile-view').classList.add('hidden');
+            document.getElementById('scanner-view').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
