@@ -7,188 +7,238 @@
     --accent: #5a6b42;
 }
 
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: #1a1a1a;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
+<body>
 
-.mobile-frame {
-    width: 100%;
-    max-width: 420px;
-    height: 100vh;
-    max-height: 850px;
-    background-color: var(--military-olive);
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    position: relative;
-    overflow: hidden;
-}
+    <div class="mobile-frame">
+        <!-- App Header -->
+        <header class="app-header flex justify-between items-center px-5 py-4 bg-[#465333] shrink-0 border-b border-black/10">
+            <div class="military-grade text-white font-bold text-sm tracking-wider bg-black/20 px-3 py-1.5 rounded-md border border-white/20 shadow-sm">
+                T.N.
+            </div>
+            <div class="text-center">
+                <span class="text-xs uppercase tracking-widest text-[#b5c49a] block font-semibold">Fuerza Armada Nacional Bolivariana</span>
+                <span class="text-xs text-white font-mono opacity-80">SISTEMA ID</span>
+            </div>
+            <div class="military-emblem w-11 h-11 bg-gradient-to-br from-[#788661] to-[#2c3521] border-2 border-[#b5c49a] rounded-full flex justify-center items-center text-[#f5f5f0] text-lg shadow-md">
+                <i class="fa-solid fa-anchor"></i>
+            </div>
+        </header>
 
-/* Cabecera */
-.app-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    background-color: var(--military-olive);
-}
+        <!-- Main Content Area -->
+        <main class="app-content flex-1 bg-[#e8e8e3] rounded-t-2xl p-5 overflow-y-auto box-border relative">
+            
+            <!-- VIEW 1: QR SCANNER VIEW -->
+            <div id="view-scanner" class="flex flex-col h-full justify-between pb-4">
+                <div>
+                    <div class="text-center mb-4">
+                        <h1 class="text-base font-bold text-[#111] uppercase tracking-wide">Escaneo de Código QR de Identificación Militar</h1>
+                        <p class="text-xs text-[#555] mt-1">Alinee el código QR dentro del marco para verificar los datos del personal.</p>
+                    </div>
 
-.military-grade {
-    color: #ffffff;
-    font-weight: bold;
-    font-size: 0.95rem;
-    letter-spacing: 0.5px;
-    background: rgba(0, 0, 0, 0.2);
-    padding: 6px 12px;
-    border-radius: 6px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
+                    <!-- Scanner Viewfinder Box -->
+                    <div class="relative w-full h-[280px] bg-[#dcdcd5] rounded-xl border-2 border-dashed border-[#788661] overflow-hidden flex flex-col items-center justify-center shadow-inner cursor-pointer" onclick="app.simulateScan()">
+                        <div class="laser-line"></div>
+                        <!-- Corner borders for viewfinder aesthetic -->
+                        <div class="absolute top-3 left-3 w-8 h-8 border-t-4 border-l-4 border-[#465333]"></div>
+                        <div class="absolute top-3 right-3 w-8 h-8 border-t-4 border-r-4 border-[#465333]"></div>
+                        <div class="absolute bottom-3 left-3 w-8 h-8 border-b-4 border-l-4 border-[#465333]"></div>
+                        <div class="absolute bottom-3 right-3 w-8 h-8 border-b-4 border-r-4 border-[#465333]"></div>
 
-.military-emblem {
-    width: 45px;
-    height: 45px;
-    background: linear-gradient(135deg, #788661, #2c3521);
-    border: 2px solid #b5c49a;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #f5f5f0;
-    font-size: 1.2rem;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.3);
-}
+                        <i class="fa-solid fa-qrcode text-6xl text-[#465333] mb-3 opacity-80"></i>
+                        <span class="text-xs font-bold text-[#465333] bg-white/80 px-3 py-1 rounded-full shadow-sm">CÁMARA ACTIVA</span>
+                    </div>
+                </div>
 
-/* Contenido Principal */
-.app-content {
-    flex: 1;
-    background-color: #e8e8e3;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    padding: 20px;
-    overflow-y: auto;
-    box-sizing: border-box;
-}
+                <div class="mt-4">
+                    <button onclick="app.simulateScan()" class="w-full bg-[#465333] hover:bg-[#2c3521] text-white font-bold py-3.5 px-4 rounded-xl shadow-lg transition duration-200 flex items-center justify-center gap-2 text-sm uppercase tracking-wider">
+                        <i class="fa-solid fa-fingerprint"></i> Simular Escaneo Exitoso
+                    </button>
+                </div>
+            </div>
 
-.hidden {
-    display: none !important;
-}
+            <!-- VIEW 2: PROFESSIONAL PROFILE VIEW (Hidden by default) -->
+            <div id="view-profile" class="hidden">
+                <!-- Verification Success Banner -->
+                <div class="bg-emerald-100 border border-emerald-300 text-emerald-800 px-3 py-2 rounded-lg text-xs font-semibold mb-4 flex items-center gap-2 shadow-sm">
+                    <i class="fa-solid fa-circle-check text-emerald-600 text-sm"></i>
+                    <span>Credencial Verificada — Estatus: ACTIVO</span>
+                </div>
 
-.card-box, .data-card {
-    background-color: var(--card-bg);
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-    border: 1px solid #dcdcd5;
-}
+                <!-- Profile Header Card -->
+                <div class="bg-[#f5f5f0] rounded-2xl p-4 shadow-md border border-[#dcdcd5] text-center mb-4">
+                    <div class="relative inline-block mx-auto mb-3">
+                        <img src="foto tn garcia.jpg" 
+                             onerror="this.src='https://placehold.co/120x120/465333/ffffff?text=TN+Garcia'" 
+                             alt="Teniente de Navío R. García L." 
+                             class="w-24 h-24 rounded-full object-cover border-4 border-[#465333] shadow-md">
+                        <div class="absolute bottom-0 right-0 bg-[#465333] text-white w-7 h-7 rounded-full flex items-center justify-center border-2 border-white text-xs">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                    </div>
 
-.data-card h2 {
-    font-size: 1.05rem;
-    text-align: center;
-    color: var(--text-main);
-    border-bottom: 2px solid #ccc;
-    padding-bottom: 10px;
-    margin-top: 0;
-    letter-spacing: 0.5px;
-}
+                    <h2 class="text-base font-extrabold text-[#111] leading-tight">Teniente de Navío</h2>
+                    <p class="text-lg font-black text-[#465333] tracking-wide mt-0.5">R. GARCÍA L.</p>
+                    <p class="text-xs text-[#555] font-medium mt-0.5">Dirección General del Despacho del MPPD — Armada Bolivariana</p>
 
-/* Estilo para la foto del perfil militar */
-.profile-photo-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 15px;
-}
+                    <!-- Interactive Tabs Navigation -->
+                    <div class="flex bg-[#e2e2dc] p-1 rounded-xl mt-4 border border-[#d0d0c8]">
+                        <button onclick="app.switchTab('identification')" id="tab-btn-identification" class="flex-1 py-1.5 text-xs font-bold rounded-lg transition-all bg-[#465333] text-white shadow-sm">
+                            Identificación
+                        </button>
+                        <button onclick="app.switchTab('medical')" id="tab-btn-medical" class="flex-1 py-1.5 text-xs font-bold rounded-lg transition-all text-[#555] hover:text-[#111]">
+                            Médico
+                        </button>
+                        <button onclick="app.switchTab('professional')" id="tab-btn-professional" class="flex-1 py-1.5 text-xs font-bold rounded-lg transition-all text-[#555] hover:text-[#111]">
+                            Profesional
+                        </button>
+                    </div>
+                </div>
 
-.profile-photo {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid var(--military-olive);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
+                <!-- TAB CONTENT: IDENTIFICATION -->
+                <div id="tab-content-identification" class="tab-pane bg-[#f5f5f0] rounded-2xl p-4 shadow-md border border-[#dcdcd5] space-y-3">
+                    <h3 class="text-xs font-bold text-[#465333] uppercase tracking-wider border-b border-[#ddd] pb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-id-card"></i> Datos Personales e Identificación
+                    </h3>
+                    <div class="grid grid-cols-2 gap-2 text-xs">
+                        <div>
+                            <span class="font-bold text-[#111] block text-[10px] tracking-wider">CÉDULA / NI:</span>
+                            <span class="text-[#555] font-mono font-medium">21.071.687</span>
+                        </div>
+                        <div>
+                            <span class="font-bold text-[#111] block text-[10px] tracking-wider">FECHA DE NACIMIENTO:</span>
+                            <span class="text-[#555] font-medium">06 / 12 / 1992</span>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 text-xs border-t border-[#e8e8e3] pt-2">
+                        <div>
+                            <span class="font-bold text-[#111] block text-[10px] tracking-wider">ESTADO CIVIL:</span>
+                            <span class="text-[#555] font-medium">Soltero</span>
+                        </div>
+                        <div>
+                            <span class="font-bold text-[#111] block text-[10px] tracking-wider">GRUPO SANGUÍNEO:</span>
+                            <span class="text-[#555] font-mono font-bold text-red-700">O Rh+</span>
+                        </div>
+                    </div>
+                    <div class="border-t border-[#e8e8e3] pt-2 text-xs">
+                        <span class="font-bold text-[#111] block text-[10px] tracking-wider">UNIDAD ASIGNADA:</span>
+                        <span class="text-[#555] font-medium">Dirección General del MPPD (MPPD)</span>
+                    </div>
+                </div>
 
-.card-box h2 {
-    font-size: 1.1rem;
-    text-align: center;
-    color: var(--text-main);
-}
+                <!-- TAB CONTENT: MEDICAL (Hidden initially) -->
+                <div id="tab-content-medical" class="tab-pane hidden bg-[#f5f5f0] rounded-2xl p-4 shadow-md border border-[#dcdcd5] space-y-3">
+                    <h3 class="text-xs font-bold text-[#465333] uppercase tracking-wider border-b border-[#ddd] pb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-heart-pulse"></i> Historial y Ficha Médica
+                    </h3>
+                    <div class="text-xs space-y-2">
+                        <div>
+                            <span class="font-bold text-[#111] block text-[10px] tracking-wider">ALERGIAS CONOCIDAS:</span>
+                            <span class="text-[#555] bg-red-50 text-red-700 px-2 py-0.5 rounded border border-red-200 inline-block font-medium">Aspirina y componentes</span>
+                        </div>
+                        <div>
+                            <span class="font-bold text-[#111] block text-[10px] tracking-wider">CONDICIONES MÉDICAS:</span>
+                            <span class="text-[#555] font-medium">Apto para servicio naval y buceo táctico.</span>
+                        </div>
+                        <div>
+                            <span class="font-bold text-[#111] block text-[10px] tracking-wider">VACUNACIÓN AL DÍA:</span>
+                            <span class="text-[#555] font-medium">Fiebre Amarilla, Tétanos, COVID-19 (Esquema completo)</span>
+                        </div>
+                        <div>
+                            <span class="font-bold text-[#111] block text-[10px] tracking-wider">CONTACTO DE EMERGENCIA:</span>
+                            <span class="text-[#555] font-medium">Sanidad Naval (Ext. 402 / Madre: 310-555-0192)</span>
+                        </div>
+                    </div>
+                </div>
 
-.card-box p {
-    text-align: center;
-    font-size: 0.85rem;
-    color: var(--text-muted);
-}
+                <!-- TAB CONTENT: PROFESSIONAL (Hidden initially) -->
+                <div id="tab-content-professional" class="tab-pane hidden bg-[#f5f5f0] rounded-2xl p-4 shadow-md border border-[#dcdcd5] space-y-3">
+                    <h3 class="text-xs font-bold text-[#465333] uppercase tracking-wider border-b border-[#ddd] pb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-medal"></i> Historial Profesional
+                    </h3>
+                    <div class="text-xs space-y-2">
+                        <div>
+                            <span class="font-bold text-[#111] block text-[10px] tracking-wider">ESPECIALIDAD MILITAR:</span>
+                            <span class="text-[#555] font-medium">Flota / Armamento</span>
+                        </div>
+                        <div>
+                            <span class="font-bold text-[#111] block text-[10px] tracking-wider">AÑOS DE SERVICIO:</span>
+                            <span class="text-[#555] font-medium">12 Años </span>
+                        </div>
+                        <div>
+                            <span class="font-bold text-[#111] block text-[10px] tracking-wider">NIVEL DE ACCESO & AUTORIZACIÓN:</span>
+                            <span class="text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 inline-block">(Restringido / Zonas de Seguridad)</span>
+                        </div>
+                        <div>
+                            <span class="font-bold text-[#111] block text-[10px] tracking-wider">CONDECORACIONES:</span>
+                            <span class="text-[#555] font-medium">Cruz Naval al Mérito (2da Clase), Medalla por Tiempo de Servicio (10 Años)</span>
+                        </div>
+                    </div>
+                </div>
 
-#reader {
-    width: 100% !important;
-    border: none !important;
-    border-radius: 8px;
-    overflow: hidden;
-    margin-top: 15px;
-    text-align: center;
-    background: #e2e2dc;
-}
+                <!-- Return to Scanner Button -->
+                <button onclick="app.resetScanner()" class="w-full mt-4 bg-[#6c757d] hover:bg-[#5a6268] text-white font-bold py-3 px-4 rounded-xl shadow transition duration-200 flex items-center justify-center gap-2 text-xs uppercase tracking-wider">
+                    <i class="fa-solid fa-rotate-left"></i> Escanear Otro Código QR
+                </button>
+            </div>
 
-/* Estilos de Campos de Datos estilo Ficha Militar */
-.data-field {
-    margin-bottom: 10px;
-    font-size: 0.9rem;
-}
+        </main>
 
-.data-field .label {
-    font-weight: 800;
-    color: var(--text-main);
-    display: block;
-    font-size: 0.75rem;
-    letter-spacing: 0.5px;
-}
+        <!-- Bottom Navigation Bar -->
+        <nav class="bottom-nav h-16 bg-[#2c3521] flex justify-around items-center border-t border-white/10 shrink-0 px-2">
+            <button onclick="app.showActivity()" class="nav-item text-[#8fa37a] hover:text-white flex flex-col items-center justify-center py-1 px-3 transition-all">
+                <i class="fa-solid fa-chart-line text-lg"></i>
+                <span class="text-[10px] mt-1 font-medium tracking-wide">Actividad</span>
+            </button>
+            <button onclick="app.resetScanner()" class="nav-item active text-white flex flex-col items-center justify-center py-1 px-4 bg-white/10 rounded-xl transition-all">
+                <i class="fa-solid fa-qrcode text-lg"></i>
+                <span class="text-[10px] mt-1 font-bold tracking-wide">Código QR</span>
+            </button>
+            <button onclick="app.showSettings()" class="nav-item text-[#8fa37a] hover:text-white flex flex-col items-center justify-center py-1 px-3 transition-all">
+                <i class="fa-solid fa-gear text-lg"></i>
+                <span class="text-[10px] mt-1 font-medium tracking-wide">Config</span>
+            </button>
+        </nav>
+    </div>
 
-.data-field .value {
-    color: var(--text-muted);
-    font-size: 0.9rem;
-}
+    <!-- Notification Toast Modal (Replaces alert() per guidelines) -->
+    <div id="app-toast" class="fixed bottom-20 left-1/2 -translate-x-1/2 bg-black/85 text-white text-xs px-4 py-2.5 rounded-xl shadow-xl transition-all duration-300 opacity-0 pointer-events-none z-50 flex items-center gap-2 border border-white/20">
+        <i class="fa-solid fa-circle-info text-[#b5c49a]"></i>
+        <span id="toast-message">Mensaje del sistema</span>
+    </div>
 
-/* Barra de Navegación Inferior */
-.bottom-nav {
-    height: 60px;
-    background-color: var(--military-dark);
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    border-top: 1px solid rgba(255,255,255,0.1);
-}
+    <!-- Application Controller Script -->
+    <script>
+        const app = {
+            simulateScan() {
+                document.getElementById('view-scanner').classList.add('hidden');
+                document.getElementById('view-profile').classList.remove('hidden');
+                this.switchTab('identification');
+                this.showToast('¡Código QR escaneado con éxito! Credencial verificada.');
+            },
 
-.nav-item {
-    background: none;
-    border: none;
-    color: #8fa37a;
-    font-size: 1.4rem;
-    cursor: pointer;
-    padding: 10px;
-    transition: color 0.2s;
-}
+            resetScanner() {
+                document.getElementById('view-profile').classList.add('hidden');
+                document.getElementById('view-scanner').classList.remove('hidden');
+                this.showToast('Escáner QR listo para nueva lectura.');
+            },
 
-.nav-item.active, .nav-item:hover {
-    color: #ffffff;
-}
+            switchTab(tabName) {
+                // Hide all tab panes
+                document.querySelectorAll('.tab-pane').forEach(el => el.classList.add('hidden'));
+                // Show selected tab pane
+                document.getElementById(`tab-content-${tabName}`).classList.remove('hidden');
 
-button {
-    background: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
+                // Reset all tab buttons
+                ['identification', 'medical', 'professional'].forEach(name => {
+                    const btn = document.getElementById(`tab-btn-${name}`);
+                    if (name === tabName) {
+                        btn.className = "flex-1 py-1.5 text-xs font-bold rounded-lg transition-all bg-[#465333] text-white shadow-sm";
+                    } else {
+                        btn.className = "flex-1 py-1.5 text-xs font-bold rounded-lg transition-all text-[#555] hover:text-[#111]";
+                    }
+                });
+            },
 
-button:hover {
-    background: #0056b3;
-}
+            showActivity() {
+                this.showToast('Historial: 14 escaneos exitosos registrados hoy.');
+            },
