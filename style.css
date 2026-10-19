@@ -1,40 +1,162 @@
+:root {
+    --military-olive: #465333;
+    --military-dark: #2c3521;
+    --card-bg: #f5f5f0;
+    --text-main: #111111;
+    --text-muted: #555555;
+    --accent: #5a6b42;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #1a1a1a;
     margin: 0;
-    padding: 20px;
+    padding: 0;
     display: flex;
     justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
-.container {
+.mobile-frame {
     width: 100%;
-    max-width: 500px;
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    text-align: center;
-}
-
-#reader {
-    width: 100%;
-    border-radius: 8px;
+    max-width: 420px;
+    height: 100vh;
+    max-height: 850px;
+    background-color: var(--military-olive);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    position: relative;
     overflow: hidden;
 }
 
+/* Cabecera */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: var(--military-olive);
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+.military-emblem {
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, #788661, #2c3521);
+    border: 2px solid #b5c49a;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #f5f5f0;
+    font-size: 1.2rem;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+}
+
+/* Contenido Principal */
+.app-content {
+    flex: 1;
+    background-color: #e8e8e3;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    padding: 20px;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
 .hidden {
-    display: none;
+    display: none !important;
 }
 
-#qr-result {
-    background: #e9ecef;
-    padding: 15px;
-    border-radius: 6px;
-    margin: 15px 0;
-    word-break: break-all;
+.card-box, .data-card {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    border: 1px solid #dcdcd5;
 }
 
+.data-card h2 {
+    font-size: 1.05rem;
+    text-align: center;
+    color: var(--text-main);
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+    margin-top: 0;
+    letter-spacing: 0.5px;
+}
+
+.card-box h2 {
+    font-size: 1.1rem;
+    text-align: center;
+    color: var(--text-main);
+}
+
+.card-box p {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+#reader {
+    width: 100% !important;
+    border: none !important;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 15px;
+}
+
+/* Estilos de Campos de Datos estilo Ficha Militar */
+.data-field {
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+}
+
+.data-field .label {
+    font-weight: 800;
+    color: var(--text-main);
+    display: block;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+}
+
+.data-field .value {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* Barra de Navegación Inferior */
+.bottom-nav {
+    height: 60px;
+    background-color: var(--military-dark);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.nav-item {
+    background: none;
+    border: none;
+    color: #8fa37a;
+    font-size: 1.4rem;
+    cursor: pointer;
+    padding: 10px;
+    transition: color 0.2s;
+}
+
+.nav-item.active, .nav-item:hover {
+    color: #ffffff;
+}
 button {
     background: #007bff;
     color: white;
