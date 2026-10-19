@@ -1,0 +1,51 @@
+CSS
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+#reader {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.hidden {
+    display: none;
+}
+
+#qr-result {
+    background: #e9ecef;
+    padding: 15px;
+    border-radius: 6px;
+    margin: 15px 0;
+    word-break: break-all;
+}
+
+button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background: #0056b3;
+}

@@ -1,0 +1,30 @@
+HTML
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escáner QR Personal</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Enlazamos la librería de lectura de QR (jsQR o html5-qrcode) -->
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <div class="container">
+        <h1>Lector QR Personal</h1>
+        
+        <!-- Contenedor donde se activará la cámara -->
+        <div id="reader"></div>
+
+        <!-- Sección donde se muestra la información escaneada -->
+        <div id="result-container" class="hidden">
+            <h2>Información Encontrada:</h2>
+            <div id="qr-result"></div>
+            <button id="scan-again">Escanear otro</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
