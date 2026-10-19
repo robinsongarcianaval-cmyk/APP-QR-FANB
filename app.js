@@ -4,7 +4,7 @@ const userDatabase = {
         medical: {
             "NOMBRE": "Robinson José García López",
             "GRUPO SANGUÍNEO": "0 RH + (O Positivo)",
-            "ALERGIAS CONOCIDAS": "Ninguna reportada / Sin alergias a medicamentos de uso común.",
+            "ALERGIAS CONOCIDAS": "Alergia a la Aspirina y sus componentes",
             "CONDICIONES MÉDICAS CRÓNICAS": "Ninguna.",
             "MEDICAMENTOS ACTUALES": "Ninguno.",
             "VACUNAS PRINCIPALES": "Tétanos, Fiebre Amarilla, Hepatitis B, COVID-19 (Esquema completo).",
@@ -20,6 +20,9 @@ const userDatabase = {
             "UNIDAD DE ADSCRIPCIÓN": "Dirección General del Despacho del MPPD",
             "FECHA DE INGRESO AL SERVICIO": "14 de Julio de 2014",
             "ESTADO DE SERVICIO": "Activo / En servicio",
+            "ARMAMENTO ASIGNADO": "Prieto Beretta / Calibre 9mm",
+            "CURSO REALIZADOS": "Operador de Lanchas Rapidas en Irán",
+            "IDIOMAS": "Persa / Ingles",
             "CONDECORACIONES Y MENCIONES DESTACADAS": "Medalla al Mérito Militar <br> Distintivo de Tropa de Operaciones Especiales"
         }
     }
