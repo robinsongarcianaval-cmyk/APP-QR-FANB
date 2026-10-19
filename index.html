@@ -3,70 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema Táctico de Identificación</title>
+    <title>Ficha Militar - Teniente de Navío</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Librería para escanear códigos QR -->
-    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+    <!-- FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="mobile-frame">
-        <!-- Barra superior -->
+        <!-- Cabecera -->
         <header class="app-header">
-            <button class="icon-btn">&#9776;</button>
-            <div class="badge-container">
-                <!-- Emblema o insignia militar simulada con CSS / Icono -->
-                <div class="military-emblem">★</div>
+            <div class="military-grade">T.N.</div> <!-- Grado del profesional: Teniente de Navío -->
+            <div class="military-emblem">
+                <i class="fa-solid fa-anchor"></i>
             </div>
-            <button class="icon-btn">&#128276;</button>
         </header>
 
         <!-- Contenido Principal -->
         <main class="app-content">
-            
-            <!-- Vista 1: Escáner inicial -->
-            <section id="scanner-section" class="view-section">
-                <div class="card-box">
-                    <h2>ESCANEAR CREDENCIAL QR</h2>
-                    <p>Alinee el código QR dentro del recuadro</p>
-                    <div id="reader"></div>
+            <!-- Tarjeta de Identificación Personal -->
+            <section class="data-card">
+                <h2>IDENTIFICACIÓN DE PERSONAL</h2>
+                
+                <!-- Foto del profesional militar -->
+                <div class="profile-photo-container">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=faces" alt="Foto del Teniente de Navío" class="profile-photo">
+                </div>
+
+                <div class="data-field">
+                    <span class="label">RANGO:</span>
+                    <span class="value">Teniente de Navío</span>
+                </div>
+                <div class="data-field">
+                    <span class="label">NOMBRE COMPLETO:</span>
+                    <span class="value">Carlos Eduardo Mendoza</span>
+                </div>
+                <div class="data-field">
+                    <span class="label">NÚMERO DE IDENTIFICACIÓN (NI):</span>
+                    <span class="value">8492015839</span>
+                </div>
+                <div class="data-field">
+                    <span class="label">FECHA DE NACIMIENTO:</span>
+                    <span class="value">14 / 08 / 1988</span>
+                </div>
+                <div class="data-field">
+                    <span class="label">UNIDAD ASIGNADA:</span>
+                    <span class="value">Comando de Guardacostas</span>
+                </div>
+                <div class="data-field">
+                    <span class="label">ROL:</span>
+                    <span class="value">Comandante de Buque</span>
+                </div>
+                <div class="data-field">
+                    <span class="label">ESTATUS:</span>
+                    <span class="value">ACTIVO</span>
+                </div>
+                <div class="data-field">
+                    <span class="label">AUTORIZACIÓN DE ACCESO:</span>
+                    <span class="value">Nivel Alfa</span>
                 </div>
             </section>
 
-            <!-- Vista 2: Datos Médicos (Oculta al inicio) -->
-            <section id="medical-section" class="view-section hidden">
-                <div class="data-card">
-                    <h2>DATOS MÉDICOS DE USUARIO</h2>
-                    <div id="medical-content">
-                        <!-- Se llena dinámicamente desde app.js -->
-                    </div>
+            <!-- Sección Escaneo de Código QR -->
+            <section class="card-box" style="margin-top: 15px;">
+                <h2>ESCANEO DE CÓDIGO QR</h2>
+                <div id="reader">
+                    <i class="fa-solid fa-qrcode" style="font-size: 3rem; color: #555; padding: 20px;"></i>
                 </div>
+                <p>Utilice la cámara para escanear otro código QR de verificación.</p>
             </section>
-
-            <!-- Vista 3: Datos Profesionales (Oculta al inicio) -->
-            <section id="professional-section" class="view-section hidden">
-                <div class="data-card">
-                    <h2>DATOS PROFESIONALES DE USUARIO</h2>
-                    <div id="professional-content">
-                        <!-- Se llena dinámicamente desde app.js -->
-                    </div>
-                </div>
-            </section>
-
         </main>
 
         <!-- Barra de Navegación Inferior -->
         <nav class="bottom-nav">
-            <button class="nav-item active" onclick="switchTab('scanner')">
-                <span>&#8962;</span>
+            <button class="nav-item" title="Actividad">
+                <i class="fa-solid fa-chart-line"></i>
             </button>
-            <button class="nav-item" onclick="switchTab('medical')">
-                <span>&#128196;</span>
+            <button class="nav-item active" title="Código QR">
+                <i class="fa-solid fa-qrcode"></i>
             </button>
-            <button class="nav-item" onclick="switchTab('professional')">
-                <span>&#9881;</span>
+            <button class="nav-item" title="Configuración">
+                <i class="fa-solid fa-gear"></i>
             </button>
         </nav>
     </div>
+</body>
+</html>
 
     <script src="app.js"></script>
 </body>
