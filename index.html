@@ -2,93 +2,79 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ficha Militar - Teniente de Navío</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- FontAwesome para iconos -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Validador de Identificación Militar - Teniente de Navío</title>
+    <!-- Tailwind CSS for modern responsive styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for military and UI icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
-    <div class="mobile-frame">
-        <!-- Cabecera -->
-        <header class="app-header">
-            <div class="military-grade">T.N.</div> <!-- Grado del profesional: Teniente de Navío -->
-            <div class="military-emblem">
-                <i class="fa-solid fa-anchor"></i>
-            </div>
-        </header>
+    <style>
+        :root {
+            --military-olive: #465333;
+            --military-dark: #2c3521;
+            --card-bg: #f5f5f0;
+            --text-main: #111111;
+            --text-muted: #555555;
+            --accent: #5a6b42;
+        }
 
-        <!-- Contenido Principal -->
-        <main class="app-content">
-            <!-- Tarjeta de Identificación Personal -->
-            <section class="data-card">
-                <h2>IDENTIFICACIÓN DE PERSONAL</h2>
-                
-                <!-- Foto del profesional militar -->
-                <div class="profile-photo-container">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=faces" alt="Foto del Teniente de Navío" class="profile-photo">
-                </div>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #121212;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-                <div class="data-field">
-                    <span class="label">RANGO:</span>
-                    <span class="value">Teniente de Navío</span>
-                </div>
-                <div class="data-field">
-                    <span class="label">NOMBRE COMPLETO:</span>
-                    <span class="value">Carlos Eduardo Mendoza</span>
-                </div>
-                <div class="data-field">
-                    <span class="label">NÚMERO DE IDENTIFICACIÓN (NI):</span>
-                    <span class="value">8492015839</span>
-                </div>
-                <div class="data-field">
-                    <span class="label">FECHA DE NACIMIENTO:</span>
-                    <span class="value">14 / 08 / 1988</span>
-                </div>
-                <div class="data-field">
-                    <span class="label">UNIDAD ASIGNADA:</span>
-                    <span class="value">Comando de Guardacostas</span>
-                </div>
-                <div class="data-field">
-                    <span class="label">ROL:</span>
-                    <span class="value">Comandante de Buque</span>
-                </div>
-                <div class="data-field">
-                    <span class="label">ESTATUS:</span>
-                    <span class="value">ACTIVO</span>
-                </div>
-                <div class="data-field">
-                    <span class="label">AUTORIZACIÓN DE ACCESO:</span>
-                    <span class="value">Nivel Alfa</span>
-                </div>
-            </section>
+        .mobile-frame {
+            width: 100%;
+            max-width: 420px;
+            height: 100vh;
+            max-height: 850px;
+            background-color: var(--military-olive);
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+            position: relative;
+            overflow: hidden;
+            border-radius: 0px;
+        }
 
-            <!-- Sección Escaneo de Código QR -->
-            <section class="card-box" style="margin-top: 15px;">
-                <h2>ESCANEO DE CÓDIGO QR</h2>
-                <div id="reader">
-                    <i class="fa-solid fa-qrcode" style="font-size: 3rem; color: #555; padding: 20px;"></i>
-                </div>
-                <p>Utilice la cámara para escanear otro código QR de verificación.</p>
-            </section>
-        </main>
+        @media (min-width: 421px) {
+            .mobile-frame {
+                border-radius: 36px;
+                border: 8px solid #2a2a2a;
+            }
+        }
 
-        <!-- Barra de Navegación Inferior -->
-        <nav class="bottom-nav">
-            <button class="nav-item" title="Actividad">
-                <i class="fa-solid fa-chart-line"></i>
-            </button>
-            <button class="nav-item active" title="Código QR">
-                <i class="fa-solid fa-qrcode"></i>
-            </button>
-            <button class="nav-item" title="Configuración">
-                <i class="fa-solid fa-gear"></i>
-            </button>
-        </nav>
-    </div>
-</body>
-</html>
+        /* Laser animation for QR scanner */
+        @keyframes scanLaser {
+            0% { top: 5%; opacity: 0.8; }
+            50% { top: 90%; opacity: 1; }
+            100% { top: 5%; opacity: 0.8; }
+        }
 
-    <script src="app.js"></script>
-</body>
-</html>
+        .laser-line {
+            position: absolute;
+            width: 85%;
+            height: 3px;
+            background: #ef4444;
+            box-shadow: 0 0 10px #ef4444, 0 0 20px #ef4444;
+            animation: scanLaser 2.5s infinite ease-in-out;
+            left: 7.5%;
+        }
+
+        /* Custom Scrollbar for inner content */
+        .app-content::-webkit-scrollbar {
+            width: 5px;
+        }
+        .app-content::-webkit-scrollbar-track {
+            background: #e8e8e3;
+        }
+        .app-content::-webkit-scrollbar-thumb {
+            background: #b5c49a;
+            border-radius: 4px;
+        }
