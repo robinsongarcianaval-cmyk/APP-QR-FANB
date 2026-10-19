@@ -40,12 +40,15 @@ body {
     background-color: var(--military-olive);
 }
 
-.icon-btn {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.4rem;
-    cursor: pointer;
+.military-grade {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .military-emblem {
@@ -95,6 +98,22 @@ body {
     letter-spacing: 0.5px;
 }
 
+/* Estilo para la foto del perfil militar */
+.profile-photo-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.profile-photo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--military-olive);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
 .card-box h2 {
     font-size: 1.1rem;
     text-align: center;
@@ -113,11 +132,13 @@ body {
     border-radius: 8px;
     overflow: hidden;
     margin-top: 15px;
+    text-align: center;
+    background: #e2e2dc;
 }
 
 /* Estilos de Campos de Datos estilo Ficha Militar */
 .data-field {
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     font-size: 0.9rem;
 }
 
@@ -125,13 +146,13 @@ body {
     font-weight: 800;
     color: var(--text-main);
     display: block;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     letter-spacing: 0.5px;
 }
 
 .data-field .value {
     color: var(--text-muted);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
 }
 
 /* Barra de Navegación Inferior */
@@ -157,6 +178,7 @@ body {
 .nav-item.active, .nav-item:hover {
     color: #ffffff;
 }
+
 button {
     background: #007bff;
     color: white;
