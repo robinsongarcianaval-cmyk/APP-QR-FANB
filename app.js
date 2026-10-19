@@ -1,4 +1,3 @@
-JavaScript
 // Base de datos local de ejemplo (puedes vincular códigos QR a textos específicos)
 const database = {
     "PROD-001": "Herramienta de diagnóstico: Motor V8 4.7L - Estado: Operativo",
